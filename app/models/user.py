@@ -9,8 +9,7 @@ class User:
 
     def __init__(self, email: str, name: str) -> None:
         self.email = email
-        self.name = name
-
+        self.name = transforming_fist_letter_in_upper_case(name)
 
     @classmethod
     def get_user(cls) -> list[dict]:
@@ -21,16 +20,16 @@ class User:
 
         user = self.__dict__
         user["email"] = transforming_email_in_lower_case(self.email)
-        user["name"] = transforming_fist_letter_in_upper_case(self.name)
+        # user["name"] = transforming_fist_letter_in_upper_case(self.name)
         user["id"] = len(read_json(self.FILEPATH)) + 1
 
-        if check_if_email_already_in_users(self.FILEPATH, user["email"]):
+        if check_if_email_already_in_users(self.FILEPATH, self.email):
             raise AlreadyExistThisEmailError
 
         if type(self.email) != str or type(self.name) != str:
             raise TypeError
 
-        return write_json(self.FILEPATH, user)
+        return write_json(self.FILEPATH, self.__dict__)
 
 
                 

@@ -1,4 +1,5 @@
 from lib2to3.pytree import type_repr
+from xxlimited import new
 from app.services.json_handler import read_json
 
 
@@ -10,13 +11,13 @@ def transforming_email_in_lower_case(email: str):
 def transforming_fist_letter_in_upper_case(name: str):
 
     new_name = ""
-        
-    if name is str:
-        name = name.split(" ")
 
-        for index, word in enumerate(name):
+    if type(name) is str:
+        list_name = name.split()
+       
+        for index, word in enumerate(list_name):
             new_name += f"{word.capitalize()} " if len(name)-1 > index else word.capitalize()
-
+            
     return new_name if type(name) is str else name
 
 

@@ -21,8 +21,6 @@ def register_user():
 
     user = User(**data)
 
-    print(data)
-
     try:
         
         return user.save_new_user(), HTTPStatus.CREATED 
